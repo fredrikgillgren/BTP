@@ -14,6 +14,10 @@ annotate service.Employee with @(
                 $Type: 'UI.DataField',
                 Value: DESIGNATION_code
             },
+                        {
+                $Type: 'UI.DataField',
+                Value: ROLE_code
+            },
             {
                 $Type: 'UI.DataField',
                 Value: createdBy
@@ -38,6 +42,10 @@ annotate service.Employee with @(
             {
                 $Type: 'UI.DataField',
                 Value: DESIGNATION_code
+            },
+                        {
+                $Type: 'UI.DataField',
+                Value: ROLE_code
             },
             {
                 $Type: 'UI.DataField',
@@ -71,6 +79,12 @@ annotate service.Employee with @(
                 Label : 'Address',
                 ID : 'idAddressData'
             },
+                        {
+                $Type: 'UI.ReferenceFacet',
+                Target : 'Projects/@UI.LineItem',
+                Label : 'Project',
+                ID : 'idProjectData'
+            },
         ],
     }
 ) {
@@ -78,6 +92,7 @@ annotate service.Employee with @(
     NAME @title : 'Name';
     EMAIL @title : 'Email';
     DESIGNATION @title : 'Designation';
+    ROLE @title : 'Role';
 };
 
 annotate service.Address with @(
@@ -156,7 +171,95 @@ annotate service.Address with @(
     COUNTRY @title : 'Country';
 };
 
+annotate service.Project with @(
+    UI: {
+        LineItem  : [
+            {
+                $Type: 'UI.DataField',
+                Value: TITLE
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: START_DATE
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: END_DATE
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: ROLE_code
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: createdBy
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: createdAt
+            },
+        ],
+        FieldGroup #BasicDataProject : {
+            $Type : 'UI.FieldGroupType',
+            Data: [
+            {
+                $Type: 'UI.DataField',
+                Value: TITLE
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: START_DATE
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: END_DATE
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: ROLE_code
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: createdBy
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: createdAt
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: modifiedBy
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: modifiedAt
+            },
+        ],
+    },
+    Facets  : [
+        {
+            $Type: 'UI.ReferenceFacet',
+            Target: '@UI.FieldGroup#BasicDataProject',
+            Label: 'Project Data',
+            ID : 'idProjectBasicData'
+        },
+    ],
+    }
+) {
+    ID @UI: {Hidden};
+    TITLE @title : 'Title';
+    START_DATE @title : 'Start Date';
+    END_DATE @title : 'End Date';
+    ROLE @title : 'Role';
+};
+
 // Add UI annotations for EMPLOYEE
 annotate service.Employee with {
     DESIGNATION @Common.ValueListWithFixedValues : true @Common.Text: DESIGNATION.name @Common.TextArrangement: #TextOnly;
+    ROLE @Common.ValueListWithFixedValues : true @Common.Text: ROLE.name @Common.TextArrangement: #TextOnly;
+}
+
+// Add UI annotations for PROJECT
+annotate service.Project with {
+    ROLE @Common.ValueListWithFixedValues : true @Common.Text: ROLE.name @Common.TextArrangement: #TextOnly;
 }

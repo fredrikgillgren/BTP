@@ -18,9 +18,13 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-easyapp": "cds watch --open easyapp/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-easyapp": "cds watch --open easyapp/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-projectaspect": "cds watch --open projectaspect/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-projectroles": "cds watch --open projectroles/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
-    "app/easyapp"
+    "app/easyapp",
+    "app/projectaspect",
+    "app/projectroles"
   ]
 }

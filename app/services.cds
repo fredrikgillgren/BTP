@@ -1,2 +1,2 @@
 
-using from './easyapp/annotations';
+using from './commonAnnotations';
