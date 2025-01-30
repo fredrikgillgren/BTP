@@ -50,7 +50,7 @@ entity PROJECT : cuid, managed {
 }
 
 Entity PROJECTROLES : cuid, managed {
-    PROJECT : Association to one PROJECT;
+    PROJECT : Association to PROJECT;
     ROLE : RoleTypes;
     EMPLOYEE : EmployeeTypes;
     START_DATE : Date;

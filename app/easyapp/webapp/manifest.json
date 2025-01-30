@@ -105,6 +105,11 @@
           "pattern": "Employee({key}):?query:",
           "name": "EmployeeObjectPage",
           "target": "EmployeeObjectPage"
+        },
+        {
+          "pattern": "Employee({key}/Address({key2})):?query:",
+          "name": "AddressObjectPage",
+          "target": "AddressObjectPage"
         }
       ],
       "targets": {
@@ -139,8 +144,24 @@
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/Employee"
+              "entitySet": "Employee",
+              "navigation": {
+                "Address": {
+                  "detail": {
+                    "route": "AddressObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "AddressObjectPage": {
+          "type": "Component",
+          "id": "AddressObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "entitySet": "Address"
             }
           }
         }

@@ -126,6 +126,7 @@ annotate service.ProjectRoles with @(
             { $Type: 'UI.ReferenceFacet', Target: '@UI.FieldGroup#BasicDataProjectRoles', Label: 'Project Role Data', ID : 'idProjectRoleBasicData' },
         ]
     }
+
 ) {
     ID @UI: {Hidden};
     PROJECT @title : 'Project';
@@ -136,12 +137,6 @@ annotate service.ProjectRoles with @(
 // Add UI annotations for EMPLOYEE
 annotate service.Employee with {
     DESIGNATION @Common.ValueListWithFixedValues : true @Common.Text: DESIGNATION.name @Common.TextArrangement: #TextOnly;
-    ROLE @Common.ValueListWithFixedValues : true @Common.Text: ROLE.name @Common.TextArrangement: #TextOnly;
-}
-
-// Add UI annotations for PROJECT
-annotate service.Project with {
-    ROLE @Common.ValueListWithFixedValues : true @Common.Text: ROLE.name @Common.TextArrangement: #TextOnly;
 }
 
 annotate service.ProjectRoles with {
@@ -149,5 +144,4 @@ annotate service.ProjectRoles with {
 }
 
 annotate service.Project with @odata.draft.enabled;
-annotate service.Employee with @odata.draft.enabled;
 

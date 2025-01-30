@@ -3,12 +3,11 @@ using btp.fs as bf from '../db/schema';
 service FullStackService {
 
     @odata.draft.enabled
-    entity Employee as select from bf.EMPLOYEE;
+    entity Employee as projection on bf.EMPLOYEE;
 
-    entity Address as select from bf.ADDRESS;
+    entity Address as projection on bf.ADDRESS;
 
-    entity Project as select from bf.PROJECT;
+    entity Project as projection on bf.PROJECT;
 
-    entity ProjectRoles as select from bf.PROJECTROLES;
-
+    entity ProjectRoles as projection on bf.PROJECTROLES;
 }

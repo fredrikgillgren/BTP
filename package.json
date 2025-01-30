@@ -7,14 +7,17 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^8",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
     "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+    "@sap/ux-cds-odata-language-server-extension": "1.16.2",
     "@sapui5/ts-types": "^1.92.2",
     "eslint": "^7.32.0",
     "express": "^4"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.7.0",
-    "@cap-js/sqlite": "^1"
+    "@cap-js/sqlite": "^1",
+    "sqlite3": "^5.0.2"
   },
   "scripts": {
     "start": "cds-serve",
@@ -26,5 +29,18 @@
     "app/easyapp",
     "app/projectaspect",
     "app/projectroles"
-  ]
+  ],
+  "cds": {
+    "features": {
+      "fiori_preview": true,
+      "fiori_routes": true
+    },
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": "*"
+      }
+    },
+    "service": "srv/service"
+  }
 }
