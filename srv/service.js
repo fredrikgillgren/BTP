@@ -3,31 +3,42 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = (srv) => {
-
+    
+    const filePath = path.join(__dirname, '../db/data/btp.fs-EmployeeList.csv'); //path to file
+    
     // Custom handler for creating an employee
     srv.before('CREATE', 'Employee', async (req) => {
-
-        // Fetch the name of the newly created employee
         const employeeName = req.data.NAME;
 
-        // Check if the employee name exists
         if (!employeeName) {
             req.error(400, 'Employee name is required');
         }
 
-        // Prepare the new entry for EmployeeList.csv
-        //generate a unique code for the new employee based of the first three letters of the employee name
-        const code = employeeName.substring(0, 3).toUpperCase();
+        // for now we the code is the same as the name
+        const code = employeeName;
         const newEmployeeEntry = `${code},${employeeName}\n`;
 
-        // Define the path to the EmployeeList.csv file
-        const filePath = path.join(__dirname, '../db/data/btp.fs-EmployeeList.csv'); // Ensure this path is correct
+        try {
+            // Append the new entry to EmployeeList.csv
+            fs.appendFileSync(filePath, newEmployeeEntry, 'utf8');
+        } catch (err) {
+            req.error(500, 'Failed to save employee to EmployeeList.csv');
+        }
+    });
 
-        // Append the new entry to the EmployeeList.csv file
-        fs.appendFile(filePath, newEmployeeEntry, (err) => {
-            if (err) {
-                req.error(500, 'Failed to save employee to EmployeeList.csv');
-            }
-        });
+    // Custom READ handler for EmployeeList to fetch updated data dynamically
+    srv.on('READ', 'EmployeeList', async (req) => {
+        try {
+            // Read the file contents dynamically every time
+            const data = fs.readFileSync(filePath, 'utf8');
+            return data.split('\n')
+                .filter(line => line.trim() !== '') // Ignore empty lines
+                .map(line => {
+                    const [code, name] = line.split(',');
+                    return { code, name };
+                });
+        } catch (err) {
+            req.error(500, 'Failed to read EmployeeList.csv');
+        }
     });
 };

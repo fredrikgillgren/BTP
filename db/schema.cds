@@ -10,7 +10,7 @@ entity DesignationList : CodeList {
 // Define the DesignationTypes type as an association to one DesignationList
 type DesignationTypes : Association to one DesignationList;
 
-// Define the RoleList entity
+// Define the RoleList entity, only display the name
 entity RoleList : CodeList {
     key code : String(30) @Common.Text : name @Common.TextArrangement: #TextOnly;
 }

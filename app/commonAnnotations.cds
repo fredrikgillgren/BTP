@@ -36,6 +36,7 @@ annotate service.Employee with @(
 annotate service.Address with @(
     UI: {
         LineItem  : [
+            { $Type: 'UI.DataField', Value: EMPLOYEE.NAME, Label: 'Employee Name' },
             { $Type: 'UI.DataField', Value: STREET },
             { $Type: 'UI.DataField', Value: NUMBER },
             { $Type: 'UI.DataField', Value: CITY },
@@ -46,6 +47,7 @@ annotate service.Address with @(
         FieldGroup #BasicDataAddress : {
             $Type : 'UI.FieldGroupType',
             Data: [
+            { $Type: 'UI.DataField', Value: EMPLOYEE.NAME, Label: 'Employee Name' },
                 { $Type: 'UI.DataField', Value: STREET },
                 { $Type: 'UI.DataField', Value: NUMBER },
                 { $Type: 'UI.DataField', Value: CITY },
@@ -55,11 +57,11 @@ annotate service.Address with @(
             ]
         },
         Facets  : [
-            { $Type: 'UI.ReferenceFacet', Target: '@UI.FieldGroup#BasicDataAddress', Label: 'Address Data', ID : 'idAddressBasicData' },
-        ]
+            { $Type: 'UI.ReferenceFacet', Target: '@UI.FieldGroup#BasicDataAddress', Label: 'Address Data', ID : 'idAddressBasicData' }        ]
     }
 ) {
     ID @UI: {Hidden};
+    EMPLOYEE @title : 'Employee';
     STREET @title : 'Street';
     NUMBER @title : 'Number';
     CITY @title : 'City';
@@ -139,9 +141,6 @@ annotate service.Employee with {
     DESIGNATION @Common.ValueListWithFixedValues : true @Common.Text: DESIGNATION.name @Common.TextArrangement: #TextOnly;
 }
 
-annotate service.ProjectRoles with {
-    EMPLOYEE @Common.ValueListWithFixedValues : true @Common.Text: EMPLOYEE.name @Common.TextArrangement: #TextOnly;
-}
 
 annotate service.Project with @odata.draft.enabled;
 
